@@ -1,0 +1,13 @@
+users
+- total number of registered and active users
+
+demographic data
+- page popularity by region, urban_or_rural, sex, age
+- which type of user is the most/least active?
+
+page popularity
+- usage of various areas of the site eg 'episode', 'category' 'a-z' (using substring in URL)
+- most popular individual pages and streams ('episode')
+
+site load
+- peak website usage days and times

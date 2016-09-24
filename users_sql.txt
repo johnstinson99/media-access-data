@@ -1,0 +1,58 @@
+-- select * from stl_load_errors;
+-- select * from pg_namespace;
+-- create database media
+--{"user_id": 12346, "last_name": "Gendreau", "date_of_birth": "1976-06-10", "postcode_district": "CF40", "first_name": "Mignonne", "gender": "f"}
+
+drop table load_users;
+create table load_users(
+user_id integer not null,
+first_name varchar(256) not null,
+last_name varchar(256) not null,
+date_of_birth_string varchar(16) not null,
+postcode_district char(4) not null,
+gender char(1) not null,
+email_address varchar(256) not null,
+direct_email_ok int not null,
+primary key(user_id))
+distkey(user_id);
+
+
+select top 100 * from load_users;
+
+drop table users;
+create table users(
+user_id integer not null,
+first_name varchar(256) not null,
+last_name varchar(256) not null,
+date_of_birth date not null,
+postcode_district char(4) not null,
+gender char(1) not null,
+email_address varchar(256) not null,
+direct_email_ok int not null,
+primary key(user_id))
+distkey(user_id);
+
+insert into users (
+  user_id,
+  first_name,
+  last_name,
+  date_of_birth,
+  postcode_district,
+  gender,
+  email_address,
+  direct_email_ok
+)select
+  user_id,
+  first_name,
+  last_name,
+  TO_DATE (date_of_birth_string, 'YYYY-MM-DD'),
+  postcode_district,
+  gender,
+  email_address,
+  direct_email_ok
+ from load_users;
+
+select top 1000 *
+from users;
+-- select datediff('year',  date_of_birth, trunc(getdate())) From users;
+-- select top 100 gender, count(*) from users group by gender;

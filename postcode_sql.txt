@@ -1,0 +1,31 @@
+drop table postcodes;
+create table postcode(
+postcode_district char(4) not null,
+postcode_area_code char(3) not null,
+latitude float null,
+longitude float null,
+easting int null,
+northing int null,
+gridref char(8) null,
+town varchar(1024) not null,
+area varchar(256) not null,
+region varchar (128) not null,
+postcodes int not null,
+active_postcodes int not null,
+population int not null,
+--population_pct float not null,
+households int not null,
+primary key(postcode_district))
+distkey(postcode_district);
+
+--select * from postcode;
+
+/*select * from stl_load_errors;
+drop table #ordered_postcodes
+select * into #ordered_postcodes from postcodes order by postcode_district
+select * from #ordered_postcodes
+delete  postcodes;
+insert  into postcodes select * from #ordered_postcodes;*/
+select top 100 * from postcodes
+
+select top 100 * from users u, postcodes p where u.postcode_district = p.postcode_district

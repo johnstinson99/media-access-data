@@ -1,0 +1,22 @@
+select top 100 * from users
+select top 100 * from postcode
+select * from postcode where latitude is null
+select * from users where first_name = 'Happy'
+select email_address, 'Dear ' + first_name + '. Please pay your license fee...' from users where last_name = 'Smylie'
+
+select top 100 *
+from users
+where datepart('month', date_of_birth) = datepart('month', getdate())
+and datepart ('day', date_of_birth) = datepart('day', getdate())
+
+select * from users where first_name = 'John'
+
+select distinct last_name from users where last_name like 'Smil%' or last_name like 'Smyl%'
+
+select first_name, last_name from users where last_name like 'Sad%'
+
+
+select count(*), region
+FROM users, postcode
+WHERE users.postcode_district = postcode.postcode_district
+GROUP BY region

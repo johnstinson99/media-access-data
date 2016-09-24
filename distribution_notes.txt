@@ -1,0 +1,35 @@
+http://downloads.bbc.co.uk/mediacentre/iplayer/iplayer-performance-jan16.pdf
+
+
+Radio:TV = 31%
+Most requests over next 10 days
+Which platform?  Computer = 85% of requests, iPhone/iPod touch = 7%, PS3 = 6%
+m:f even
+main usage under 55
+97% streams, 3% downloads
+av 2 requests per user
+good programs on Sat results in high usage on Sun.
+most requested episodes
+most requested episodes per series
+live = 2/3 for Radio.  Live = just 4% for iPlayer
+internet usage pattern by time of day. How to reproduce?  a) sum different series, b) data points at minute by minute slots?
+iPlayer use for TV peaks at 9pm. iPlayer use for radio peaks at various break times? during the day.
+Radio listening is far higher than iPlayer use!!
+Age and sex data was measured using monthly survey
+- m:f by month
+- age band by month
+- more m than f using TV iPlayer, more f than m using radio.
+- iPlayer users by age vs all TV users by age
+
+Stream = click to play instantly
+Users = count of browsers
+
+
+Format
+1) Theory
+2) Demos
+3) Similar exercises - really get people thinking.  Don't do all the work myself.
+
+Do the demos using a test dataset.  All the exercises using simulated BBC dataset?
+Provide answers to the exercises to keep everyone in sync.
+

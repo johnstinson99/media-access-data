@@ -1,0 +1,33 @@
+user (simulated data)
+- user_id
+- first_name
+- last_name
+- gender (m/f/o)
+- date_of_birth
+- region
+
+page (real URLs from BBC iPlayer)
+- page_id
+- app_name (homepage, news, sport, cbbc, iplayer, rm(radio and music))
+- url
+- live_stream or iPlayer
+
+page_visit (simulated data)
+- page_id
+- user_id
+- device_id
+- start_access_time
+- access_duration
+
+device
+- device_id
+- platform (big_screen, computer, mobile, tablet)
+
+
+===============================================================================
+postcode_details (real data: large dataset)
+- postcode: "AL1 1AF"
+- region: "East of England"
+- county: "Hertfordshire"
+- town: "St Albans"
+- urban_or_rural: "Urban city and town"
