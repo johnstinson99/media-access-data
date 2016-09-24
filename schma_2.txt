@@ -22,6 +22,15 @@ page_visit (simulated data)
 device
 - device_id
 - platform (big_screen, computer, mobile, tablet)
+-- Unknown
+   Internet TV / connected
+   devices
+   TV platform operators
+   Games consoles
+   Computers
+   Tablets
+   Mobile devices
+
 
 
 ===============================================================================

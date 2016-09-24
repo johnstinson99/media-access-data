@@ -19,18 +19,30 @@ def findBBCURLs(inputString):
     bbcURLsSomeWithWWW = [(url if not url.endswith("/") else url[:-1]) for url in bbcURLSomeWithForwardSlash ]
     #replace www.bbc.co.uk with bbc.co.uk
     bbcURLsMayEndInBBC = [url.replace("www.bbc.co.uk", "bbc.co.uk").replace("bbc.co.uk", "www.bbc.co.uk") for url in bbcURLsSomeWithWWW] #first replace www.bbc.co.uk with bbc.co.uk, then change all of them to www.bbc.co.uk
-    #remove BBC from end of URL
+    # remove BBC from end of URL
     bbcURLsMayEndInSlashAgain = [url if not url.endswith("BBC") else url[:-3] for url in bbcURLsMayEndInBBC]
-    #Remove slashes again in case BBC occurred after a slash.
-    bbcURLs = [(url if not url.endswith("/") else url[:-1]) for url in bbcURLsMayEndInSlashAgain ]
-    setURLs = set(bbcURLs)
-    return setURLs  #convert to a set to remove duplicates
+    # Remove slashes again in case BBC occurred after a slash.
+    listURLs = [(url if not url.endswith("/") else url[:-1]) for url in bbcURLsMayEndInSlashAgain ]
+    setURLs = set(listURLs)
+    dictWithCount = {}
+    for url in setURLs:
+        if(listURLs.count(url)>5):
+            print(url)
+        dictWithCount[url] = listURLs.count(url)
 
-def getTupleURL_List():
-    #create a tuple containing useful info about the url, for example is it a home page,
+    return dictWithCount  #convert to a set to remove duplicates
+dict = findBBCURLs(getStringFromFile())
+print(dict)
+values = set(list(dict.values()))
+print(values)
+
+
+def get_url_dict_list():
+    # create a tuple containing useful info about the url, for example is it a home page,
     # what are the various sections of the URL etc.
-    bbc_url_tuples = []
-    urls = findBBCURLs(getStringFromFile())
+    bbc_url_dict_list = []
+    url_dict = findBBCURLs(getStringFromFile())
+    urls = url_dict.keys()
     for url in urls:
         url_split = url.split('/')[3:]  #3: removes ['http:', '',  from the start
         #print (len(url_split))
@@ -53,13 +65,21 @@ def getTupleURL_List():
                 )
         cat0 = myCategories[0]
         tuple = platformHomepageDict.get(myCategories[0])
-        is_homepage = (my_len < 2);
+        is_homepage = 1 if my_len < 2 else 0
         if tuple is not None:
             myPlatform = platformHomepageDict.get(cat0)
-            bbc_url_tuples.append([myPlatform, is_homepage, myCategories[0], myCategories[1], myCategories[2], myCategories[3], url])
+            bbc_url_dict_list.append({'platform': myPlatform,
+                                     'is_homepage': is_homepage,
+                                     'category_0': myCategories[0],
+                                     'category_1': myCategories[1],
+                                     'category_2': myCategories[2],
+                                     'category_3': myCategories[3],
+                                     'url': url,
+                                     'proportion': url_dict[url]})
+            # bbc_url_tuples.append([myPlatform, is_homepage, myCategories[0], myCategories[1], myCategories[2], myCategories[3], url, url_dict[url]])
         else:
             print ("---Not found in list - " + cat0)
-    return bbc_url_tuples
+    return bbc_url_dict_list
 
 
 #tuple becomes list
@@ -98,12 +118,18 @@ platformHomepageDict = {"news":     "news",
                         }
 
 
-myListOfTuples = getTupleURL_List()
+url_dict_list = get_url_dict_list()
 #myListOfTuples.sort(key=lambda tup: tup[0])  #sort by key
-myListOfTuples.sort(key = lambda tup: len(tup[6]))
-print (myListOfTuples)
-for myTuple in myListOfTuples:
-    print (myTuple)
+# url_dict.sort(key = lambda tup: len(tup[6]))
+# print (url_dict_list)
+# for dict_list in url_dict_list:
+    # print (dict_list)
 
-with open('C:\\Users\\John\\Documents\\2016\\SQL Training 2016 Unicom\\Datasets\\python_output\\urls.json', 'w') as outfile:
-    json.dump(myListOfTuples, outfile, indent = 3)
+# with open('C:\\Users\\John\\Documents\\2016\\SQL Training 2016 Unicom\\Datasets\\output_files\\urls.json', 'w') as outfile:
+#     json.dump(url_dict_list, outfile, indent = 3)
+
+print('---result')
+with open('C:\\Users\\John\\Documents\\2016\\SQL Training 2016 Unicom\\Datasets\\output_files\\urls.json', 'w') as outfile:
+    for dict in url_dict_list:
+        print(dict)
+        outfile.write(json.dumps(dict))
